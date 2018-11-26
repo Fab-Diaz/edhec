@@ -63,8 +63,10 @@
   <ItemGroup>
     <Compile Include="Assets\src\Button.cs" />
     <Compile Include="Assets\src\drawCube.cs" />
+    <Compile Include="Assets\src\IconManager.cs" />
     <Compile Include="Assets\src\MoveInput.cs" />
     <Compile Include="Assets\src\PathFinding.cs" />
+    <Compile Include="Assets\src\PathFindingButton.cs" />
     <Compile Include="Assets\src\PathFindingManager.cs" />
     <Compile Include="Assets\src\ShopPopup.cs" />
     <Compile Include="Assets\src\TouchInput.cs" />

@@ -7,7 +7,8 @@ public class ShopPopup : MonoBehaviour {
     private float scaleX;
     private float scaleY;
     private float scaleZ;
-
+    public bool isIcon = false;
+    public bool hide = false;
 
     // Use this for initialization
     void Start () {
@@ -25,18 +26,18 @@ public class ShopPopup : MonoBehaviour {
 
         int speed = 20;
 
-        if ((this.transform.position.x < limitMaxX && this.transform.position.x > limitMinX)
+        if (((this.transform.position.x < limitMaxX && this.transform.position.x > limitMinX)
             && (this.transform.position.y < limitMaxY && this.transform.position.y > limitMinY) 
-            && this.transform.localScale.x <= scaleX)
+            && this.transform.localScale.x <= scaleX) && hide == false)
         {
             this.transform.localScale = new Vector3(
                 this.transform.localScale.x + (scaleX / speed),
                 this.transform.localScale.y + (scaleY / speed),
                 this.transform.localScale.z + (scaleZ / speed));
         }
-        else if (((this.transform.position.x > limitMaxX || this.transform.position.x < limitMinX)
+        else if ((((this.transform.position.x > limitMaxX || this.transform.position.x < limitMinX)
             || (this.transform.position.y > limitMaxY || this.transform.position.y < limitMinY))
-            && this.transform.localScale.x > 0)
+            && this.transform.localScale.x > 0) || hide == true)
         {
             this.transform.localScale = new Vector3(
                 this.transform.localScale.x - (scaleX / speed),

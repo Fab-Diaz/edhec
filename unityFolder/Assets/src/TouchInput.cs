@@ -31,7 +31,6 @@ public class TouchInput : MonoBehaviour {
             {
 
                 GameObject recipient = hit.transform.gameObject;
-                print(recipient);
                 touchList.Add(recipient);
 
                 if (Input.GetMouseButtonDown(0))

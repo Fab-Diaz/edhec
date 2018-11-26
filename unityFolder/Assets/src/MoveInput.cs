@@ -9,14 +9,21 @@ public class MoveInput : MonoBehaviour {
     private Vector2 deltaPosition;
     private Vector3 initialPosition;
     private float time = 0;
+    public bool refreshPos = false;
 
     void Start () {
-        cachedTransform = transform.parent.transform; 
+        cachedTransform = transform.parent.transform;
         startingPos = cachedTransform.position;
-
+        if (this.name == "gpsInput")
+            transform.parent.transform.position = new Vector3(transform.parent.transform.position.x, (-134 - 44), transform.parent.transform.position.z);
     }
 
     void Update () {
+        if (refreshPos)
+        {
+            cachedTransform = transform.parent.transform;
+            startingPos = cachedTransform.position;
+        }
     }
     void OnTouchDown()
     {
@@ -29,34 +36,25 @@ public class MoveInput : MonoBehaviour {
         time += Time.deltaTime;
         deltaPosition = Input.GetTouch(0).deltaPosition;
         bool isIdle = (Mathf.Abs(initialPosition.x - cachedTransform.position.x) < 5 && Mathf.Abs(initialPosition.y - cachedTransform.position.y) < 5);
-/*        if (time > 0.3 && time < 1.2 && isIdle)
-        {
-            GameObject.Find("favorite (1)").GetComponent<Animator>().enabled = true;
-            GameObject.Find("favorite (1)").GetComponent<Animator>().SetBool("replay", true);
-        }*/
+
         if (time >= 0.8 && isIdle)
-        {
-            //GameObject.Find("favorite (1)").GetComponent<Animator>().SetBool("replay", false);
-            GameObject.Find("mapInput").GetComponent<BoxCollider>().enabled = false;
-        }
+            this.GetComponent<BoxCollider>().enabled = false;
         if (time > 2 || time > 1 && (Mathf.Abs(initialPosition.x - cachedTransform.position.x) > 6 || Mathf.Abs(initialPosition.y - cachedTransform.position.y) > 6))
             time = -999;
         if (time > 0.05 || time < 0)
-        {
             DragObj(deltaPosition);
-        }
     }
 
     void OnTouchUp()
     {
         time = 0;
-        GameObject.Find("mapInput").GetComponent<BoxCollider>().enabled = true;
+        this.GetComponent<BoxCollider>().enabled = true;
     }
 
     void OnTouchExit()
     {
         time = 0;
-        GameObject.Find("mapInput").GetComponent<BoxCollider>().enabled = true;
+        this.GetComponent<BoxCollider>().enabled = true;
     }
 
     void DragObj (Vector2 deltaPos) {

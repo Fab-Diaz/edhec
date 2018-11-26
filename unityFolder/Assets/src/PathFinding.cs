@@ -15,7 +15,6 @@ public class PathFinding : MonoBehaviour {
     public bool find = false;
 	// Use this for initialization
 	void Start () {
-        findIt();
     }
 
     void findIt()
@@ -73,6 +72,8 @@ public class PathFinding : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
+        if (from != null && to != null)
+            findIt();
 		if (find)
         {
             findIt();
